@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CharacterComponent } from './character.component';
-
-
+import { CharacterRoutingModule } from './character-routing.module';
 
 @NgModule({
   declarations: [
-    CharacterComponent
+    CharacterComponent,
+    CharacterRoutingModule.components,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    CharacterRoutingModule,
   ]
 })
 export class CharacterModule { }

@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EpisodeComponent } from './episode.component';
-
-
+import { EpisodeRoutingModule } from './episode-routing.module';
 
 @NgModule({
   declarations: [
-    EpisodeComponent
+    EpisodeRoutingModule.components,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    EpisodeRoutingModule,
   ]
 })
 export class EpisodeModule { }
