@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { ApiConfig } from '../../core/api/api-config.class';
-import { ICharacterResponse } from './character.interface';
+import { ICharacterItemResponse, ICharacterResponse } from './character.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,10 @@ export class CharacterService {
       .pipe(
         map((res) => res.results)
       );
+  }
+
+  public findById(id: number | string): Observable<ICharacterItemResponse> {
+    return this.api.get(`character/${id}`)
   }
 
 }
