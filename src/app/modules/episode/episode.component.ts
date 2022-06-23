@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IEpisodioResponse } from '../../services/episode/episode.interface';
 import { EpisodeService } from '../../services/episode/episode.service';
 
@@ -13,14 +14,25 @@ export class EpisodeComponent implements OnInit {
 
   constructor(
     private episodeService: EpisodeService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.getAllCharacter();
+    this.route.queryParams
+      .subscribe(params => {
+        if ((params as any)?.search) {
+          this.getAllEpisode({
+            name: (params as any)?.search
+          })
+        } else {
+          this.getAllEpisode()
+        }
+      }
+      );
   }
 
-  private getAllCharacter() {
-    this.episodeService.findAll().subscribe(res => this.episodioList = res)
+  private getAllEpisode(q?: any) {
+    this.episodeService.findAll(q).subscribe(res => this.episodioList = res)
   }
 
 }

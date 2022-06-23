@@ -7,11 +7,20 @@
       <li [routerLink]="['character']" [routerLinkActive]="'item-selected'">
         <span>Characters</span>
       </li>
-      <li [routerLink]="['locations']" [routerLinkActive]="'item-selected'">
+      <li [routerLink]="['location']" [routerLinkActive]="'item-selected'">
         <span>Locations</span>
       </li>
       <li [routerLink]="['episode']" [routerLinkActive]="'item-selected'">
         <span>Episodes</span>
+      </li>
+      <li>
+        <form nz-form nzLayout="vertical" [formGroup]="formSearch" (ngSubmit)="handleSearchSubmit()">
+          <input
+            formControlName="search"
+            class="search"
+            type="search"
+            placeholder="Search by name">
+        </form>
       </li>
     </ul>
   </nav>
