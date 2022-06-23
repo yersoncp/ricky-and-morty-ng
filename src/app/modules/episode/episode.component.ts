@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IEpisodioResponse } from '../../services/episode/episode.interface';
+import { EpisodeService } from '../../services/episode/episode.service';
 
 @Component({
   selector: 'app-episode',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EpisodeComponent implements OnInit {
 
-  constructor() { }
+  episodioList: IEpisodioResponse[] = [];
+
+  constructor(
+    private episodeService: EpisodeService,
+  ) { }
 
   ngOnInit(): void {
+    this.getAllCharacter();
+  }
+
+  private getAllCharacter() {
+    this.episodeService.findAll().subscribe(res => this.episodioList = res)
   }
 
 }

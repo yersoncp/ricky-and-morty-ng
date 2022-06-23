@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ILocationResponse } from '../../services/location/location.interface';
+import { LocationService } from '../../services/location/location.service';
 
 @Component({
   selector: 'app-locations',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LocationsComponent implements OnInit {
 
-  constructor() { }
+  locationList: ILocationResponse[] = [];
+
+  constructor(
+    private locationService: LocationService,
+  ) { }
 
   ngOnInit(): void {
+    this.getAllCharacter();
+  }
+
+  private getAllCharacter() {
+    this.locationService.findAll().subscribe(res => this.locationList = res)
   }
 
 }

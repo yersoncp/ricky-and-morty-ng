@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ICharacterResponse } from '../../services/character/character.interface';
+import { CharacterService } from '../../services/character/character.service';
 
 @Component({
   selector: 'app-character',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CharacterComponent implements OnInit {
 
-  constructor() { }
+  characterList: ICharacterResponse[] = [];
+
+  constructor(
+    private characterService: CharacterService,
+  ) { }
 
   ngOnInit(): void {
+    this.getAllCharacter();
+  }
+
+  private getAllCharacter() {
+    this.characterService.findAll().subscribe(res => this.characterList = res)
   }
 
 }

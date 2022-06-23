@@ -1,1 +1,12 @@
-<p>character works!</p>
+<h2>Characters</h2>
+
+<div class="gridContainer">
+  <ng-container *ngFor="let item of characterList">
+    <div>
+      <h4>{{ item.name }}</h4>
+      <div>
+        <img src={{item.image}} width="64px" alt="">
+      </div>
+    </div>
+  </ng-container>
+</div>
