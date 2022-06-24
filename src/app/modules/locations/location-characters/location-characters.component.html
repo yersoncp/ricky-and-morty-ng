@@ -1,0 +1,14 @@
+<h2>Characters by location</h2>
+
+<div class="gridContainer">
+  <ng-container *ngFor="let item of characterList">
+    <div>
+      <a [routerLink]="['/character', item.id]">
+        <h4>{{ item.name }}</h4>
+        <div>
+          <img src={{item.image}} width="64px" alt="">
+        </div>
+      </a>
+    </div>
+  </ng-container>
+</div>

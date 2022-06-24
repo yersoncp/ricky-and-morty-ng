@@ -3,8 +3,11 @@
 <div class="gridContainer">
   <ng-container *ngFor="let item of locationList">
     <div>
-      <h4>{{ item.name }}</h4>
+      <a [routerLink]="['/location/character', getIds(item.residents)]">
+        <h4>{{ item.name }}</h4>
+      </a>
       <div>Dimension: {{ item.dimension }} </div>
+      <hr>
     </div>
   </ng-container>
 </div>

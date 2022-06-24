@@ -19,6 +19,18 @@ export class CharacterService {
       );
   }
 
+  public findMultiple(ids: string): Observable<ICharacterResponse[]> {
+    return this.api.get<ICharacterResponse[]>(`character/${ids}`).pipe(
+      map(e => {
+        if (e?.length) {
+          return e;
+        } else {
+          return [e] as unknown as ICharacterResponse[];
+        }
+      })
+    )
+  }
+
   public findById(id: number | string): Observable<ICharacterItemResponse> {
     return this.api.get(`character/${id}`)
   }

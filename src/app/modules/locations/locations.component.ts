@@ -32,7 +32,15 @@ export class LocationsComponent implements OnInit {
   }
 
   private getAllLocations(q?: any) {
-    this.locationService.findAll(q).subscribe(res => this.locationList = res)
+    this.locationService.findAll(q).subscribe(res => {
+      this.locationList = res
+    })
+  }
+
+  getIds(urls: string[]) {
+    return urls && urls
+      .map((e: any) => e.split('/').reverse()[0])
+      .join(',')
   }
 
 }
