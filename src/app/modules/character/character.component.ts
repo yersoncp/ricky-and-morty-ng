@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { ICharacterResponse } from '../../services/character/character.interface';
-import { CharacterService } from '../../services/character/character.service';
+import { CharacterState } from '../../state/character/character.reducer';
+import * as charactersSelectors from './../../state/character/character.selector'
+import * as charactersActions from './../../state/character/character.action'
 
 @Component({
   selector: 'app-character',
@@ -10,29 +14,38 @@ import { CharacterService } from '../../services/character/character.service';
 })
 export class CharacterComponent implements OnInit {
 
-  characterList: ICharacterResponse[] = [];
+  public readonly loaded$: Observable<boolean> = this.store.pipe(
+    select(charactersSelectors.getCharactersLoaded)
+  );
+  public readonly characterList$: Observable<ICharacterResponse[]> = this.store.pipe(
+    select(charactersSelectors.getAllCharacters)
+  );
 
   constructor(
-    private characterService: CharacterService,
     private route: ActivatedRoute,
+    private readonly store: Store<CharacterState>,
   ) { }
 
   ngOnInit(): void {
+    this.init();
     this.route.queryParams
       .subscribe(params => {
         if ((params as any)?.search) {
-          this.getAllCharacter({
+          this.loadCharacters({
             name: (params as any)?.search
-          })
+          });
         } else {
-          this.getAllCharacter()
+          this.loadCharacters();
         }
       }
     );
   }
 
-  private getAllCharacter(q?: any) {
-    this.characterService.findAll(q).subscribe(res => this.characterList = res)
+  public init(): void {
+    this.store.dispatch(charactersActions.Init());
+  }
+  public loadCharacters(q?: any): void {
+    this.store.dispatch(charactersActions.LoadCharacters(q));
   }
 
 }
