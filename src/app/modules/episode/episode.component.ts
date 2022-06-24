@@ -35,4 +35,10 @@ export class EpisodeComponent implements OnInit {
     this.episodeService.findAll(q).subscribe(res => this.episodioList = res)
   }
 
+  getIds(urls: string[]) {
+    return urls && urls
+      .map((e: any) => e.split('/').reverse()[0])
+      .join(',')
+  }
+
 }

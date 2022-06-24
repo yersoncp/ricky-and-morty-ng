@@ -3,7 +3,10 @@
 <div class="gridContainer">
   <ng-container *ngFor="let item of episodioList">
     <div>
-      <h4>{{ item.name }}</h4>
+      <a [routerLink]="['/episode/character', getIds(item.characters)]">
+        <h4>{{ item.name }}</h4>
+      </a>
+      <hr>
     </div>
   </ng-container>
 </div>
